@@ -1,9 +1,10 @@
 export enum Colors {
-  Red = "red",
-  Green = "green",
-  Blue = "blue",
-  Yellow = "yellow",
+  Red = "tomato",
+  Green = "lightgreen",
+  Blue = "lightblue",
+  Yellow = "#ffef00",
   Pink = "hotpink",
   Lime = "lime",
   Orange = "orange",
+  Purple = "purple",
 }
