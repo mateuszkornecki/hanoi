@@ -60,9 +60,6 @@ function Board() {
         newStacks[stacksToChange.to as keyof Stacks] = newEnd;
         return newStacks;
       });
-    } else {
-      console.log("invalid move");
-      setStacksToChange(initialState);
     }
   };
 
