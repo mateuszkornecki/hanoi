@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/hanoi/static/css/main.cb7c3e55.chunk.css",
+    "main.js": "/hanoi/static/js/main.7af7dc44.chunk.js",
+    "main.js.map": "/hanoi/static/js/main.7af7dc44.chunk.js.map",
+    "runtime-main.js": "/hanoi/static/js/runtime-main.f33cb55d.js",
+    "runtime-main.js.map": "/hanoi/static/js/runtime-main.f33cb55d.js.map",
+    "static/js/2.f0f81535.chunk.js": "/hanoi/static/js/2.f0f81535.chunk.js",
+    "static/js/2.f0f81535.chunk.js.map": "/hanoi/static/js/2.f0f81535.chunk.js.map",
+    "index.html": "/hanoi/index.html",
+    "precache-manifest.459d63971e23e4e8103cd86e0b09b856.js": "/hanoi/precache-manifest.459d63971e23e4e8103cd86e0b09b856.js",
+    "service-worker.js": "/hanoi/service-worker.js",
+    "static/css/main.cb7c3e55.chunk.css.map": "/hanoi/static/css/main.cb7c3e55.chunk.css.map",
+    "static/js/2.f0f81535.chunk.js.LICENSE.txt": "/hanoi/static/js/2.f0f81535.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f33cb55d.js",
+    "static/js/2.f0f81535.chunk.js",
+    "static/css/main.cb7c3e55.chunk.css",
+    "static/js/main.7af7dc44.chunk.js"
+  ]
+}
