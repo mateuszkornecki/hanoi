@@ -1,5 +1,5 @@
 import React from "react";
-import "../App.scss";
+import "./Board.scss";
 import { Segment } from "./Segment";
 
 export interface StackProps {
@@ -17,7 +17,7 @@ export function Stack({ segments, stackIndex }: StackProps) {
   return (
     <div className="stack" id={stackIndex} style={stackStyle}>
       {segments.map((segmentIndex) => (
-        <Segment index={segmentIndex} key={segmentIndex} />
+        <Segment index={segmentIndex} key={segmentIndex + "asd"} />
       ))}
     </div>
   );
