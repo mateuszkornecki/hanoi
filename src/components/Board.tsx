@@ -8,7 +8,7 @@ interface Stacks {
   third: Array<number>;
 }
 
-interface StacksToChange {
+interface Move {
   from: keyof Stacks | "";
   to: keyof Stacks | "";
 }
@@ -19,46 +19,45 @@ function Board() {
     second: [],
     third: [0, 1, 2, 3, 5],
   };
-  const initialState: StacksToChange = { from: "", to: "" };
+  const immobility: Move = { from: "", to: "" };
   const [stacks, setStacks] = useState(initialStacksConfig);
-  const [stacksToChange, setStacksToChange] = useState(initialState);
+  const [move, setMove] = useState(immobility);
 
-  const targetStack = stacks[stacksToChange.to];
+  const targetStack = stacks[move.to];
 
   useEffect(() => {
-    setStacksToChange(initialState);
+    setMove(immobility);
     moveSegments();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [targetStack]);
 
   const setStacksToEdit = (id: string) => {
-    if (!stacksToChange.from && stacks[id].length) {
-      setStacksToChange((prevState) => ({ ...prevState, from: id }));
-    } else if (stacksToChange.from && stacksToChange.from !== id) {
-      setStacksToChange((prevState) => ({ ...prevState, to: id }));
+    if (!move.from && stacks[id].length) {
+      setMove((prevState) => ({ ...prevState, from: id }));
+    } else if (move.from && move.from !== id) {
+      setMove((prevState) => ({ ...prevState, to: id }));
     } else {
-      setStacksToChange(initialState);
+      setMove(immobility);
     }
   };
 
   const moveSegments = (): void => {
     const isLegalMove =
-      stacksToChange.from &&
-      stacksToChange.to &&
-      (!stacks[stacksToChange.to].length ||
-        stacks[stacksToChange.from][0] < stacks[stacksToChange.to][0]);
+      move.from &&
+      move.to &&
+      (!stacks[move.to].length || stacks[move.from][0] < stacks[move.to][0]);
 
     if (isLegalMove) {
       setStacks((prevState) => {
-        const start = prevState[stacksToChange.from];
-        const end = prevState[stacksToChange.to];
+        const start = prevState[move.from];
+        const end = prevState[move.to];
         const newStart = [...start];
         newStart.splice(0, 1);
         const newEnd = prevState.second ? [start[0], ...end] : [start[0]];
 
         const newStacks = { ...prevState };
-        newStacks[stacksToChange.from] = newStart;
-        newStacks[stacksToChange.to] = newEnd;
+        newStacks[move.from] = newStart;
+        newStacks[move.to] = newEnd;
         return newStacks;
       });
     }
