@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Stack } from "./Stack";
 
 interface Stacks {
+  [k: string]: Array<number>;
   first: Array<number>;
   second: Array<number>;
   third: Array<number>;
 }
 
 interface StacksToChange {
-  from: keyof Stacks | null;
-  to: keyof Stacks | null;
+  from: keyof Stacks | "";
+  to: keyof Stacks | "";
 }
 
 function Board() {
@@ -18,11 +19,11 @@ function Board() {
     second: [],
     third: [0, 1, 2, 3, 5],
   };
-  const initialState: StacksToChange = { from: null, to: null };
+  const initialState: StacksToChange = { from: "", to: "" };
   const [stacks, setStacks] = useState(initialStacksConfig);
   const [stacksToChange, setStacksToChange] = useState(initialState);
 
-  const targetStack = stacks[stacksToChange.to as keyof Stacks];
+  const targetStack = stacks[stacksToChange.to];
 
   useEffect(() => {
     setStacksToChange(initialState);
@@ -31,10 +32,10 @@ function Board() {
   }, [targetStack]);
 
   const setStacksToEdit = (id: string) => {
-    if (!stacksToChange.from && (stacks as any)[id].length) {
-      setStacksToChange((prevState) => ({ ...prevState, from: id } as any));
+    if (!stacksToChange.from && stacks[id].length) {
+      setStacksToChange((prevState) => ({ ...prevState, from: id }));
     } else if (stacksToChange.from && stacksToChange.from !== id) {
-      setStacksToChange((prevState) => ({ ...prevState, to: id } as any));
+      setStacksToChange((prevState) => ({ ...prevState, to: id }));
     } else {
       setStacksToChange(initialState);
     }
@@ -49,15 +50,15 @@ function Board() {
 
     if (isLegalMove) {
       setStacks((prevState) => {
-        const start = prevState[stacksToChange.from as keyof Stacks];
-        const end = prevState[stacksToChange.to as keyof Stacks];
+        const start = prevState[stacksToChange.from];
+        const end = prevState[stacksToChange.to];
         const newStart = [...start];
         newStart.splice(0, 1);
         const newEnd = prevState.second ? [start[0], ...end] : [start[0]];
 
         const newStacks = { ...prevState };
-        newStacks[stacksToChange.from as keyof Stacks] = newStart;
-        newStacks[stacksToChange.to as keyof Stacks] = newEnd;
+        newStacks[stacksToChange.from] = newStart;
+        newStacks[stacksToChange.to] = newEnd;
         return newStacks;
       });
     }
