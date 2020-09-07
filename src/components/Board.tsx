@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Stack } from "./Stack";
+import { DragDropContext } from "react-beautiful-dnd";
 
 interface Stacks {
   [k: string]: Array<number>;
@@ -17,7 +18,7 @@ function Board() {
   const initialStacksConfig: Stacks = {
     first: [],
     second: [],
-    third: [0, 1, 2, 3, 5],
+    third: [0, 1, 2],
   };
   const immobility: Move = { from: "", to: "" };
   const [stacks, setStacks] = useState(initialStacksConfig);
@@ -71,12 +72,23 @@ function Board() {
     }
   };
 
+  const handleDragEnd = (result: any) => {
+    const { destination, source, draggableId } = result;
+    if (destination && source) {
+      console.log(draggableId);
+      setMove({ from: source.droppableId, to: destination.droppableId });
+    }
+    return true;
+  };
+
   return (
-    <div className="Board" onClick={handleClick}>
-      <Stack stackIndex={"first"} segments={stacks.first} />
-      <Stack stackIndex={"second"} segments={stacks.second} />
-      <Stack stackIndex={"third"} segments={stacks.third} />
-    </div>
+    <ul className="Board" onClick={handleClick}>
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <Stack stackIndex={"first"} segments={stacks.first} />
+        <Stack stackIndex={"second"} segments={stacks.second} />
+        <Stack stackIndex={"third"} segments={stacks.third} />
+      </DragDropContext>
+    </ul>
   );
 }
 

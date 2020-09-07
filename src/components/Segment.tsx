@@ -1,9 +1,17 @@
 import React from "react";
 import { Colors } from "../Colors";
+import { Draggable } from "react-beautiful-dnd";
+import styled from "styled-components";
 
 export interface SegmentProps {
   index: number;
 }
+
+const Container = styled.div`
+  margin-bottom: 4px;
+  border-radius: 2px;
+  display: flex;
+`;
 
 export function Segment({ index }: SegmentProps) {
   const colors = [
@@ -24,5 +32,17 @@ export function Segment({ index }: SegmentProps) {
     borderRadius: "4px",
   };
 
-  return <div style={segmentStyle} />;
+  return (
+    <Draggable draggableId={index + "asd"} index={index}>
+      {(provided, snapshot) => (
+        <Container
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <div style={segmentStyle} />
+        </Container>
+      )}
+    </Draggable>
+  );
 }
